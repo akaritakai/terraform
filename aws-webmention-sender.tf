@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "webmention_sender_role_policy" {
   }
   statement {
     effect    = "Allow"
-    actions   = ["s3:GetObject", "s3:GetObjectVersion", "s3:PubObject", "s3:PutObjectVersion"]
+    actions   = ["s3:GetObject", "s3:GetObjectVersion", "s3:PutObject", "s3:PutObjectVersion"]
     resources = ["arn:aws:s3:::${aws_s3_bucket.webmention_db.bucket}/webmention.json"]
   }
 }
