@@ -24,15 +24,22 @@ resource "aws_cloudfront_cache_policy" "default" {
 /*
  * Return an HSTS header in a response.
  */
-resource "aws_cloudfront_function" "hsts" {
-  name    = "hsts"
+resource "aws_cloudfront_function" "default_headers" {
+  name    = "default-headers"
   runtime = "cloudfront-js-1.0"
   code    = <<EOD
 function handler(event) {
   var response = event.response;
   var headers = response.headers;
+  // Add HSTS headers to the response.
+  // This forces HTTPS for requests to the given domain for 2 years.
+  // Note: Someday I may want to add the includeSubDomains option.
   headers['strict-transport-security'] = {
     value: 'max-age=63072000; preload'
+  };
+  // Add cache headers to cache the data for at least 1 day.
+  headers['cache-control'] = {
+    value: 'max-age=86400, public'
   };
   return response;
 }

@@ -179,7 +179,7 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
     }
     function_association {
       event_type   = "viewer-response"
-      function_arn = aws_cloudfront_function.hsts.arn
+      function_arn = aws_cloudfront_function.default_headers.arn
     }
   }
   ordered_cache_behavior {
@@ -192,7 +192,7 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
     path_pattern           = "tmp/*"
     function_association {
       event_type   = "viewer-response"
-      function_arn = aws_cloudfront_function.hsts.arn
+      function_arn = aws_cloudfront_function.default_headers.arn
     }
   }
   default_root_object = "index.html"

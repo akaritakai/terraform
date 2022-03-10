@@ -108,7 +108,7 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
     }
     function_association {
       event_type   = "viewer-response"
-      function_arn = aws_cloudfront_function.hsts.arn
+      function_arn = aws_cloudfront_function.default_headers.arn
     }
   }
   ordered_cache_behavior {
@@ -121,7 +121,7 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
     path_pattern           = "keybase.txt"
     function_association {
       event_type   = "viewer-response"
-      function_arn = aws_cloudfront_function.hsts.arn
+      function_arn = aws_cloudfront_function.default_headers.arn
     }
   }
   default_root_object = "index.html"
