@@ -41,6 +41,26 @@ function handler(event) {
   headers['cache-control'] = {
     value: 'max-age=86400, public'
   };
+  // Add a restrictive CSP for the site and a more generous one for the blog
+  if (event.request.uri.startsWith('/blog/')) {
+      headers['content-security-policy'] = {
+          value: "frame-ancestors 'none'; default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' https://i.ytimg.com; manifest-src 'self'; media-src 'self'; worker-src 'none';"
+      }
+  } else {
+      headers['content-security-policy'] = {
+          value: "frame-ancestors 'none'; default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none';"
+      }
+  }
+  // Add various security headers
+  headers['x-content-type-options'] = {
+    value: 'nosniff'
+  };
+  headers['x-frame-options'] = {
+    value: 'DENY'
+  };
+  headers['x-xss-protection'] = {
+    value: '1; mode=block'
+  };
   return response;
 }
 EOD
