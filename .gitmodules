@@ -1,0 +1,3 @@
+[submodule "www.akaritakai.net"]
+	path = www.akaritakai.net
+	url = git@github.com:akaritakai/www.akaritakai.net.git
