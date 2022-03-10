@@ -49,7 +49,7 @@ resource "aws_s3_object" "www_akaritakai_net" {
   bucket       = aws_s3_bucket.www_akaritakai_net.id
   key          = each.value
   source       = "build/www-akaritakai-net/${each.value}"
-  content_type = lookup(local.content_types, regex("\\.^[.]+$", each.value), "application/octet-stream")
+  content_type = lookup(local.content_types, regex("\\.[^.]+$", each.value), "application/octet-stream")
   etag         = filemd5("build/www-akaritakai-net/${each.value}")
 }
 
