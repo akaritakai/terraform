@@ -60,7 +60,7 @@ def write_database(db: Database) -> None:
 def read_sitemap() -> list[str]:
     r = requests.get("https://akaritakai.net/sitemap.xml")
     xml = r.text
-    soup = BeautifulSoup(xml, "lxml")
+    soup = BeautifulSoup(xml, "html.parser")
     tags = soup.find_all("loc")
     return [tag.text for tag in tags]
 
