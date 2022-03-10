@@ -1,0 +1,74 @@
+==================================================================
+https://keybase.io/akaritakai
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://jkaufman.me
+  * I am akaritakai (https://keybase.io/akaritakai) on keybase.
+  * I have a public key with fingerprint F597 DE8F 941B 9D32 737A  3241 E772 DDF3 BA29 84F3
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010113f378c75e31d89c5e4223c6afd90c58bcee71fd117ef9ec7782d0deb54cac260a",
+            "fingerprint": "f597de8f941b9d32737a3241e772ddf3ba2984f3",
+            "host": "keybase.io",
+            "key_id": "e772ddf3ba2984f3",
+            "kid": "010113f378c75e31d89c5e4223c6afd90c58bcee71fd117ef9ec7782d0deb54cac260a",
+            "uid": "ec92297a196ae3b8de0660d501ae1600",
+            "username": "akaritakai"
+        },
+        "service": {
+            "hostname": "jkaufman.me",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1456999835,
+    "expire_in": 157680000,
+    "prev": "e1022796287786e3d6afaf3eaa88e5b3fcc277a70714442f229e891404fcaf07",
+    "seqno": 28,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.51
+Comment: https://keybase.io/crypto
+
+yMNFAnicrVJ9UBRlGL9TkLgR8A/TcgJyx4kcTtrP290jJmhKZqi0kMgIu97dfReW
+w7tzd4+DEOSQZkwUalQYvstxjq8cTQYqgpKPgoYpSETpAwdqUIQTI2UKNGnX7L/+
+7P3jfed53t/v9zy/Z57+kNUGk/GaPHGrc2vJLeNQT5XbkDoeUpOPcE4hD7HmI3Z4
+/4HZAlRUm10SECuCYiiGESJBMzxNQQITGJanIInjBG8BosCiPMVwPIQ0JgoYRkOR
+hTxNM7iACpCjSB7wuAUFiBkRJUcGlF2y5FA1WZFiaQEyIktiHCsQOE3QgMBJDNI0
+LggiwQGcZUiR0IiZTkVnaM1xQIExklPLaYHtfnv/gf+f+3b/U4dncZylAcZaACQ4
+RoCoxYIKFIoBiFlQVAcqUHaAvVBDAzuQJVW7JaTAjGj5HImH+mh1Lw8wWXbgFvcC
+R4wWmRGX7FSdvDNb+8hUVZdi1YlqnktHeiBne6Bh4ySHoA1SY+RAWZGcDsSKaUhe
+lXRRjKQsLMsyBGVGYK5LkqFN0hEUbWFQ7eh1YI5uB0NxnGYtOKN5tkBC0GYCRAIC
+wDCQ4giR53GaBjRKYyRJ4qLmHTIsRqKkyAMRpRHd1T6HE7HijNYnyNA0FSnDAVS3
+DJGC3p70AIPRZFgTuErfMIMpeN2/e2eXwu6hz2X/WTZz0+Nan1C6O9Jfi4X683Z5
+85n4rxourS1p/CbioYLpItA9aFx4qRqeGw5o7quYaUwFqT/78+WD4zciFMow71hJ
+aC0frkmeevX6sUlfpm/k3OTbZ42+poHirLqnTnoGg69MzyvPDtR/ub/p44Am/+2+
+/T1N6Ru/+ODhx1sjbYem7wY9uvRZM7Zjsj7y9Erp09zlt9ZElSZ2HXwtrWjiavds
+Z0Ph9yn11b6G4g55Q/dSude7udK8J3z0/bSKinTMs3a2bZ4o/e498ElfIPtO/IKt
+/WL7silqIXGMKQ4LocK3Gbd4UoZHonZ1nEp4fVP9K79bx7tPeVs6W+rmn9m6fWB0
+jnj58+hDQ3HnK4/VmpenGuNOemKeWPk6abLC/VsXldabe+W0cDzL5x3rH110924+
+r16/GjFW1l+9nBq27fbM0alAaSjoV6P10vZBiTceQHP/evdMUFdB1lxyTZu9e3XT
+kwvhiM0xcUb0JTVc6LK/efjbweifAjaUV80V7rszm8sl264daTa1tL2Q+OGFyqoj
+sdGfDiyXBdtm/sDMP0T4kLuFoYHFi4dzlWp3vPfsnbjLMsne2NiicLUlN+mdznXp
+i5t2qFGPrBTtrEsp+ugXxpv2Y/tSbLGxblUicmBLbObgiRf3yEVsmt8fvPvobN+9
+N0YbZzouJlU+Fty6fqpy5PnQvwF3C9Jv
+=WMh2
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/akaritakai
+
+==================================================================
