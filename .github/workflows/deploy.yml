@@ -32,8 +32,8 @@ jobs:
         with:
           name: www-akaritakai-net-build
           path: www.akaritakai.net/output/dist/**/*
-  terraform:
-    name: "Terraform"
+  deploy:
+    name: "Deploy"
     needs: build_www_akaritakai_net
     runs-on: ubuntu-latest
     steps:
