@@ -80,20 +80,15 @@ resource "aws_cloudfront_function" "redirect_www_akaritakai_net" {
   runtime = "cloudfront-js-1.0"
   code    = <<EOD
 function handler(event) {
-  var request = event.request;
-  var prefixes = [
-    'http://jkaufman.me/',
-    'https://jkaufman.me/',
-    'http://www.jkaufman.me/',
-    'https://www.jkaufman.me/'
-  ];
-  for (const prefix of prefixes) {
-    if (request.uri.startsWith(prefix)) {
-      request.uri = 'https://akaritakai.net/' + request.uri.substring(prefix.length);
-      break;
+  return {
+    statusCode: 301,
+    statusDescription: 'Moved Permanently',
+    headers: {
+      "location": {
+        "value": `https://akaritakai.net${event.request.uri}`
+      }
     }
   }
-  return request;
 }
 EOD
 }
