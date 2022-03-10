@@ -44,11 +44,11 @@ function handler(event) {
   // Add a restrictive CSP for the site and a more generous one for the blog
   if (event.request.uri.startsWith('/blog/')) {
       headers['content-security-policy'] = {
-          value: "frame-ancestors 'none'; default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' https://i.ytimg.com; manifest-src 'self'; media-src 'self'; worker-src 'none';"
+          value: "frame-ancestors 'none'; default-src 'none'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' https://i.ytimg.com; manifest-src 'self'; media-src 'self'; worker-src 'none'; form-action 'self';"
       }
   } else {
       headers['content-security-policy'] = {
-          value: "frame-ancestors 'none'; default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none';"
+          value: "frame-ancestors 'none'; default-src 'none'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none'; form-action 'self';"
       }
   }
   // Add various security headers
