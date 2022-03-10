@@ -14,6 +14,14 @@ resource "aws_s3_bucket_acl" "webmention_db" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_public_access_block" "webmention_db" {
+  bucket                  = aws_s3_bucket.webmention_db.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 /*
  * Create the lambda function.
  */

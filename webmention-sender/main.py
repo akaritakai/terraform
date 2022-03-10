@@ -52,7 +52,7 @@ def read_database() -> Database:
 # This function writes the webmention.json database file to the S3 bucket
 def write_database(db: Database) -> None:
     client = boto3.client('s3')
-    data = jsonpickle.pickler.encode(db, unpicklable=False)
+    data = jsonpickle.pickler.encode(db)
     client.put_object(Bucket='akaritakai-webmention-sender-db', Key='webmention.json', Body=data)
 
 
@@ -165,6 +165,7 @@ def create_plan() -> Plan:
         # Handle pages that were added
         elif page_url not in prev_db.pages:
             for mention in next_db.pages[page_url].mentions.values():
+                prev_db.pages[page_url] = Page(page_url, next_db.pages[page_url].last_modified, {})
                 added.append(Operation(page_url, mention.link, mention.webmention))
         # Handle pages that may have been modified:
         else:
