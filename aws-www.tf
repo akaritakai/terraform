@@ -33,9 +33,9 @@ function handler(event) {
   var headers = response.headers;
   // Add HSTS headers to the response.
   // This forces HTTPS for requests to the given domain for 2 years.
-  // Note: Someday I may want to add the includeSubDomains option.
+  // Note: Someday I may want to add the includeSubDomains option, and when I do that, I can add the preload option.
   headers['strict-transport-security'] = {
-    value: 'max-age=63072000; preload'
+    value: 'max-age=63072000'
   };
   // Add cache headers to cache the data for at least 1 day
   headers['cache-control'] = {
