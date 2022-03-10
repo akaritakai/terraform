@@ -171,24 +171,30 @@ def create_plan() -> Plan:
         else:
             prev_page = prev_db.pages[page_url]
             next_page = next_db.pages[page_url]
-            # Check the modification date to see if the links might have changed
-            if prev_page.last_modified != next_page.last_modified:
-                # The modification date changed, so we need to update the time and check the links
-                prev_page.last_modified = next_page.last_modified
-                link_urls = set(prev_page.mentions.keys()) | set(next_page.mentions.keys())
-                for link_url in link_urls:
-                    # Handle links that were removed
-                    if link_url not in next_page.mentions:
-                        webmention_url = prev_page.mentions[link_url].webmention
-                        removed.append(Operation(page_url, link_url, webmention_url))
-                    # Handle links that were added
-                    elif link_url not in prev_page.mentions:
-                        webmention_url = next_page.mentions[link_url].webmention
-                        added.append(Operation(page_url, link_url, webmention_url))
-                    # Since the page updated, we do need to reissue webmentions anyway
-                    else:
-                        webmention_url = next_page.mentions[link_url].webmention
-                        added.append(Operation(page_url, link_url, webmention_url))
+
+            # Check the modification date to see if the links might have changed and update DB to latest
+            changed = prev_page.last_modified != next_page.last_modified
+            prev_page.last_modified = next_page.last_modified
+            link_urls = set(prev_page.mentions.keys()) | set(next_page.mentions.keys())
+            for link_url in link_urls:
+                # Handle links that were removed
+                if link_url not in next_page.mentions:
+                    webmention_url = prev_page.mentions[link_url].webmention
+                    removed.append(Operation(page_url, link_url, webmention_url))
+                # Handle links that were added
+                elif link_url not in prev_page.mentions:
+                    webmention_url = next_page.mentions[link_url].webmention
+                    added.append(Operation(page_url, link_url, webmention_url))
+                # Since the page updated, we need to reissue webmentions
+                elif changed:
+                    prev_page.mentions.pop(link_url)
+                    webmention_url = next_page.mentions[link_url].webmention
+                    added.append(Operation(page_url, link_url, webmention_url))
+                # If the webmention link has changed, we probably should notify the new server
+                elif prev_page.mentions[link_url].webmention != next_page.mentions[link_url].webmention:
+                    prev_page.mentions.pop(link_url)
+                    webmention_url = next_page.mentions[link_url].webmention
+                    added.append(Operation(page_url, link_url, webmention_url))
     return Plan(prev_db, added, removed)
 
 
