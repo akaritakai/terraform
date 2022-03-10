@@ -1,3 +1,6 @@
 [submodule "www.akaritakai.net"]
 	path = www.akaritakai.net
 	url = git@github.com:akaritakai/www.akaritakai.net.git
+[submodule "wordle-solver"]
+	path = wordle-solver
+	url = git@github.com:akaritakai/wordle-solver.git
