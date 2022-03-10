@@ -84,8 +84,8 @@ function handler(event) {
     statusCode: 301,
     statusDescription: 'Moved Permanently',
     headers: {
-      "location": {
-        "value": `https://akaritakai.net${event.request.uri}`
+      'location': {
+        'value': 'https://akaritakai.net' + event.request.uri
       }
     }
   }
