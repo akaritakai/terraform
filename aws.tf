@@ -7,6 +7,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.4.0"
     }
+    external = {
+      source  = "hashicorp/external"
+      version = "2.2.0"
+    }
   }
   required_version = ">= 1.1.6"
   cloud {

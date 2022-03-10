@@ -1,0 +1,4 @@
+beautifulsoup4
+jsonpickle
+lxml
+requests
