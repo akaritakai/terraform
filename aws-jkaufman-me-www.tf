@@ -136,7 +136,7 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn            = aws_acm_certificate_validation.www_akaritakai_net.certificate_arn
+    acm_certificate_arn            = aws_acm_certificate_validation.www_jkaufman_me.certificate_arn
     cloudfront_default_certificate = false
     minimum_protocol_version       = "TLSv1.2_2021"
     ssl_support_method             = "sni-only"
