@@ -67,6 +67,7 @@ resource "aws_lambda_function" "webmention_sender" {
   source_code_hash = module.python_archive.source_code_hash
   role             = aws_iam_role.webmention_sender.arn
   runtime          = "python3.9"
+  timeout          = 900
 }
 
 /*
