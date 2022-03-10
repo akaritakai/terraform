@@ -141,9 +141,6 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
     minimum_protocol_version       = "TLSv1.2_2021"
     ssl_support_method             = "sni-only"
   }
-  provisioner "local-exec" {
-    command = "aws cloudfront create-invalidation --distribution-id ${self.id} --paths '/*'"
-  }
 }
 
 /*
