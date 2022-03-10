@@ -148,6 +148,16 @@ function handler(event) {
     request.uri += 'index.html';
   } else if (!request.uri.includes('.')) {
     request.uri += '/index.html';
+  } else if (request.uri == '/wordle') {
+    return {
+      statusCode: 301,
+      statusDescription: 'Moved Permanently',
+      headers: {
+        'location': {
+          'value': 'https://akaritakai.net/wordle/'
+        }
+      }
+    };
   }
   return request;
 }
