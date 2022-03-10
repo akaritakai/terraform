@@ -1,0 +1,59 @@
+name: "Build and Deploy"
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build_www_akaritakai_net:
+    name: Build www.akaritakai.net
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: www.akaritakai.net
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up node environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Save build
+        uses: actions/upload-artifact@v2
+        with:
+          name: www-akaritakai-net-build
+          path: www.akaritakai.net/output/dist/**/*
+  terraform:
+    name: "Terraform"
+    needs: build_www_akaritakai_net
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download www.akaritakai.net build
+        uses: actions/download-artifact@v2
+        with:
+          name: www-akaritakai-net-build
+          path: build/www-akaritakai-net/
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
