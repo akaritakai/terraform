@@ -144,11 +144,7 @@ resource "aws_cloudfront_function" "redirect_root" {
   code    = <<EOD
 function handler(event) {
   var request = event.request;
-  if (request.uri.endsWith('/')) {
-    request.uri += 'index.html';
-  } else if (!request.uri.includes('.')) {
-    request.uri += '/index.html';
-  } else if (request.uri == '/wordle') {
+  if (request.uri == '/wordle') {
     return {
       statusCode: 301,
       statusDescription: 'Moved Permanently',
@@ -158,6 +154,10 @@ function handler(event) {
         }
       }
     };
+  } else if (request.uri.endsWith('/')) {
+    request.uri += 'index.html';
+  } else if (!request.uri.includes('.')) {
+    request.uri += '/index.html';
   }
   return request;
 }
