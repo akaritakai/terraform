@@ -163,6 +163,16 @@ resource "aws_route53_record" "aaaa_jkaufman_me" {
   }
 }
 
+resource "aws_route53_record" "caa_jkaufman_me" {
+  name    = "jkaufman.me"
+  type    = "CAA"
+  zone_id = aws_route53_zone.jkaufman_me.zone_id
+  ttl     = 300
+  records = [
+    "0 issue \"amazon.com\""
+  ]
+}
+
 resource "aws_route53_record" "a_www_jkaufman_me" {
   name    = "www.jkaufman.me"
   type    = "A"
@@ -183,4 +193,14 @@ resource "aws_route53_record" "aaaa_www_jkaufman_me" {
     name                   = aws_cloudfront_distribution.www_jkaufman_me.domain_name
     zone_id                = aws_cloudfront_distribution.www_jkaufman_me.hosted_zone_id
   }
+}
+
+resource "aws_route53_record" "caa_www_jkaufman_me" {
+  name    = "www.jkaufman.me"
+  type    = "CAA"
+  zone_id = aws_route53_zone.jkaufman_me.zone_id
+  ttl     = 300
+  records = [
+    "0 issue \"amazon.com\""
+  ]
 }

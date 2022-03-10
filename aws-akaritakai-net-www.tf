@@ -238,6 +238,16 @@ resource "aws_route53_record" "aaaa_akaritakai_net" {
   }
 }
 
+resource "aws_route53_record" "caa_akaritakai_net" {
+  name    = "akaritakai.net"
+  type    = "CAA"
+  zone_id = aws_route53_zone.akaritakai_net.zone_id
+  ttl     = 300
+  records = [
+    "0 issue \"amazon.com\""
+  ]
+}
+
 resource "aws_route53_record" "a_www_akaritakai_net" {
   name    = "www.akaritakai.net"
   type    = "A"
@@ -258,4 +268,14 @@ resource "aws_route53_record" "aaaa_www_akaritakai_net" {
     name                   = aws_cloudfront_distribution.www_akaritakai_net.domain_name
     zone_id                = aws_cloudfront_distribution.www_akaritakai_net.hosted_zone_id
   }
+}
+
+resource "aws_route53_record" "caa_www_akaritakai_net" {
+  name    = "www.akaritakai.net"
+  type    = "CAA"
+  zone_id = aws_route53_zone.akaritakai_net.zone_id
+  ttl     = 300
+  records = [
+    "0 issue \"amazon.com\""
+  ]
 }
