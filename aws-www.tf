@@ -20,3 +20,21 @@ resource "aws_cloudfront_cache_policy" "default" {
     enable_accept_encoding_gzip   = true
   }
 }
+
+/*
+ * Return an HSTS header in a response.
+ */
+resource "aws_cloudfront_function" "hsts" {
+  name    = "hsts"
+  runtime = "cloudfront-js-1.0"
+  code    = <<EOD
+function handler(event) {
+  var response = event.response;
+  var headers = response.headers;
+  headers['strict-transport-security'] = {
+    value: 'max-age=63072000; preload'
+  };
+  return response;
+}
+EOD
+}

@@ -106,6 +106,10 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.redirect_www_akaritakai_net.arn
     }
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.hsts.arn
+    }
   }
   ordered_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
@@ -115,6 +119,10 @@ resource "aws_cloudfront_distribution" "www_jkaufman_me" {
     target_origin_id       = "S3-www-jkaufman-me"
     viewer_protocol_policy = "redirect-to-https"
     path_pattern           = "keybase.txt"
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.hsts.arn
+    }
   }
   default_root_object = "index.html"
   enabled             = true

@@ -177,6 +177,10 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.redirect_root.arn
     }
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.hsts.arn
+    }
   }
   ordered_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
@@ -186,6 +190,10 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
     target_origin_id       = "S3-www-akaritakai-net-tmp"
     viewer_protocol_policy = "redirect-to-https"
     path_pattern           = "tmp/*"
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.hsts.arn
+    }
   }
   default_root_object = "index.html"
   enabled             = true
