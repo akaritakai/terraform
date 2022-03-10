@@ -28,7 +28,7 @@ resource "aws_route53_hosted_zone_dnssec" "akaritakai_net" {
 }
 
 /*
- * Set up records for Google Workspace Mail and Keybase
+ * Set up records for Google Workspace Mail, Keybase, and Google Search Console
  */
 resource "aws_route53_record" "mx_akaritakai_net" {
   name    = "akaritakai.net"
@@ -51,7 +51,8 @@ resource "aws_route53_record" "txt_akaritakai_net" {
   ttl     = 300
   records = [
     "v=spf1 include:_spf.google.com ~all",
-    "keybase-site-verification=3ZUGns24mLq2hS4sKIxuzk9Z7YQSQEDg0jR-5Hg05Tc"
+    "keybase-site-verification=3ZUGns24mLq2hS4sKIxuzk9Z7YQSQEDg0jR-5Hg05Tc",
+    "google-site-verification=ZXHofHKtc1doOYXbFcUXMaKYTW0Vsgef8-c0Wdc4diI"
   ]
 }
 
