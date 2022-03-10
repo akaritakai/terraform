@@ -9,6 +9,7 @@ locals {
     ".html" : "text/html",
     ".ico" : "image/vnd.microsoft.icon",
     ".js" : "application/javascript",
+    ".png" : "image/png",
     ".rss" : "application/rss+xml",
     ".txt" : "text/plain",
     ".webp" : "image/webp",
@@ -43,7 +44,7 @@ resource "aws_s3_bucket_policy" "www_akaritakai_net" {
   policy = data.aws_iam_policy_document.www_akaritakai_net_s3_website_public_read.json
 }
 
-# Upload our statically built website to the S3 bucket
+# Upload our statically built website (www.akaritakai.net) to the S3 bucket
 resource "aws_s3_object" "www_akaritakai_net" {
   for_each     = fileset("build/www-akaritakai-net/", "**/*")
   bucket       = aws_s3_bucket.www_akaritakai_net.id
@@ -51,6 +52,16 @@ resource "aws_s3_object" "www_akaritakai_net" {
   source       = "build/www-akaritakai-net/${each.value}"
   content_type = lookup(local.content_types, regex("\\.[^.]+$", each.value), "application/octet-stream")
   etag         = filemd5("build/www-akaritakai-net/${each.value}")
+}
+
+# Upload the wordle-solver project to the S3 bucket
+resource "aws_s3_object" "wordle-solver" {
+  for_each     = fileset("build/wordle-solver/", "**/*")
+  bucket       = aws_s3_bucket.www_akaritakai_net.id
+  key          = "wordle/${each.value}"
+  source       = "build/wordle-solver/${each.value}"
+  content_type = lookup(local.content_types, regex("\\.[^.]+$", each.value), "application/octet-stream")
+  etag         = filemd5("build/wordle-solver/${each.value}")
 }
 
 /*

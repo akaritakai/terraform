@@ -32,9 +32,36 @@ jobs:
         with:
           name: www-akaritakai-net-build
           path: www.akaritakai.net/output/dist/**/*
+  build_wordle_solver:
+    name: Build wordle-solver
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: wordle-solver
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_AUTH_TOKEN }}
+          submodules: true
+      - name: Set up node environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Save build
+        uses: actions/upload-artifact@v2
+        with:
+          name: wordle-solver-build
+          path: wordle-solver/dist/**/*
   deploy:
     name: "Deploy"
-    needs: build_www_akaritakai_net
+    needs: [build_www_akaritakai_net, build_wordle_solver]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -44,6 +71,11 @@ jobs:
         with:
           name: www-akaritakai-net-build
           path: build/www-akaritakai-net/
+      - name: Download wordle-solver build
+        uses: actions/download-artifact@v2
+        with:
+          name: wordle-solver-build
+          path: build/wordle-solver/
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
