@@ -61,6 +61,9 @@ function handler(event) {
   headers['x-xss-protection'] = {
     value: '1; mode=block'
   };
+  headers['referrer-policy'] = {
+    value: 'no-referrer'
+  };
   return response;
 }
 EOD
