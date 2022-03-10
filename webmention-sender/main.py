@@ -78,7 +78,7 @@ def find_last_modified(url) -> int:
 def find_links(url) -> list[str]:
     r = requests.get(url)
     html = r.text
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html, "html.parser")
     tags = soup.find_all("a")
     links = []
     for tag in tags:
@@ -116,7 +116,7 @@ def find_webmention_url(url) -> Optional[str]:
             return link
         # Per RFC, now we find the first <link> or <a> tag in the document with rel="webmention"
         html = r.text
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, "html.parser")
         tags = soup.find_all(['a', 'link'])
         for tag in tags:
             if 'rel' in tag.attrs and tag['rel'] == 'webmention':
