@@ -65,7 +65,7 @@ resource "aws_s3_object" "wordle-solver" {
 }
 
 /*
- * Create the /tmp/ bucket for the site
+ * Create the /tmp/ S3 bucket for the site
  */
 resource "aws_s3_bucket" "www_akaritakai_net_tmp" {
   bucket = "www-akaritakai-net-tmp"
@@ -100,6 +100,33 @@ data "aws_iam_policy_document" "www_akaritakai_net_tmp_s3_website_public_read" {
 resource "aws_s3_bucket_policy" "www_akaritakai_net_tmp" {
   bucket = aws_s3_bucket.www_akaritakai_net_tmp.id
   policy = data.aws_iam_policy_document.www_akaritakai_net_tmp_s3_website_public_read.json
+}
+
+/*
+ * Create the /static/ S3 bucket for the site
+ */
+resource "aws_s3_bucket" "www_akaritakai_net_static" {
+  bucket = "www-akaritakai-net-static"
+}
+
+data "aws_iam_policy_document" "www_akaritakai_net_static_s3_website_public_read" {
+  statement {
+    sid    = "PublicReadGetObject"
+    effect = "Allow"
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+    actions = ["s3:GetObject"]
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.www_akaritakai_net_static.bucket}/*"
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "www_akaritakai_net_static" {
+  bucket = aws_s3_bucket.www_akaritakai_net_static.id
+  policy = data.aws_iam_policy_document.www_akaritakai_net_static_s3_website_public_read.json
 }
 
 /*
@@ -195,6 +222,19 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
       function_arn = aws_cloudfront_function.default_headers.arn
     }
   }
+  ordered_cache_behavior {
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    cache_policy_id        = aws_cloudfront_cache_policy.default.id
+    compress               = true
+    target_origin_id       = "S3-www-akaritakai-net-static"
+    viewer_protocol_policy = "redirect-to-https"
+    path_pattern           = "static/*"
+    function_association {
+      event_type   = "viewer-response"
+      function_arn = aws_cloudfront_function.default_headers.arn
+    }
+  }
   default_root_object = "index.html"
   enabled             = true
   http_version        = "http2"
@@ -206,6 +246,10 @@ resource "aws_cloudfront_distribution" "www_akaritakai_net" {
   origin {
     domain_name = aws_s3_bucket.www_akaritakai_net_tmp.bucket_domain_name
     origin_id   = "S3-www-akaritakai-net-tmp"
+  }
+  origin {
+    domain_name = aws_s3_bucket.www_akaritakai_net_static.bucket_domain_name
+    origin_id   = "S3-www-akaritakai-net-static"
   }
   price_class = "PriceClass_100"
   restrictions {

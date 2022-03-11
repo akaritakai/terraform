@@ -37,10 +37,16 @@ function handler(event) {
   headers['strict-transport-security'] = {
     value: 'max-age=63072000'
   };
-  // Add cache headers to cache the data for at least 1 day
-  headers['cache-control'] = {
-    value: 'max-age=86400, public'
-  };
+  // Add cache headers to cache the data for at least 1 day, or 30 days if tmp or static hosting.
+  if (event.request.uri.startsWith('/tmp/') || event.request.uri.startsWith('/static'/)) {
+    headers['cache-control'] = {
+      value: 'max-age=2592000, private, immutable'
+    };
+  } else {
+    headers['cache-control'] = {
+      value: 'max-age=86400, public'
+    };
+  }
   // Add a restrictive CSP for the site and a more generous one for the blog
   if (event.request.uri.startsWith('/blog/')) {
       headers['content-security-policy'] = {
