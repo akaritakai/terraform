@@ -38,7 +38,7 @@ function handler(event) {
     value: 'max-age=63072000'
   };
   // Add cache headers to cache the data for at least 1 day, or 30 days if tmp or static hosting.
-  if (event.request.uri.startsWith('/tmp/') || event.request.uri.startsWith('/static'/)) {
+  if (event.request.uri.startsWith('/tmp/') || event.request.uri.startsWith('/static/')) {
     headers['cache-control'] = {
       value: 'max-age=2592000, private, immutable'
     };
