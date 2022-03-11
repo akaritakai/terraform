@@ -205,7 +205,7 @@ def send_webmention(op: Operation) -> bool:
     try:
         response = requests.post(op.webmention_url, data=payload, headers=headers)
         print(f"Got response {response.status_code} from {op.webmention_url} for {op.source} -> {op.target}")
-        return response.status_code == 201 or response.status_code == 202
+        return response.status_code >= 200 and response.status_code < 300
     except requests.exceptions.RequestException as e:
         print(f"Error when sending webmention to {op.webmention_url}: {e}")
         return False
