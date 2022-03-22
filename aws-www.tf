@@ -47,7 +47,7 @@ function handler(event) {
   }
   // Add a restrictive CSP for the site and a more generous one for the blog
   if (event.request.uri.startsWith('/blog/')) {
-      policies = [
+      var policies = [
           "base-uri 'self';",
           "connect-src 'self';",
           "default-src 'none';",
@@ -67,7 +67,7 @@ function handler(event) {
           value: policies.join(' ')
       }
   } else {
-      policies = [
+      var policies = [
           "base-uri 'self';",
           "connect-src 'self';",
           "default-src 'none';",
