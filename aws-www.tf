@@ -47,12 +47,44 @@ function handler(event) {
   }
   // Add a restrictive CSP for the site and a more generous one for the blog
   if (event.request.uri.startsWith('/blog/')) {
+      policies = [
+          "base-uri 'self';",
+          "connect-src 'self';",
+          "default-src 'none';",
+          "font-src 'self';",
+          "form-action 'self';",
+          "frame-ancestors 'none';",
+          "frame-src 'self' https://www.youtube-nocookie.com;",
+          "img-src 'self' https://i.ytimg.com;",
+          "manifest-src 'self';",
+          "media-src 'self';",
+          "object-src 'none';",
+          "script-src 'self';",
+          "style-src 'self';",
+          "worker-src 'none';"
+      ];
       headers['content-security-policy'] = {
-          value: "frame-ancestors 'none'; default-src 'none'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' https://i.ytimg.com; manifest-src 'self'; media-src 'self'; worker-src 'none'; form-action 'self';"
+          value: policies.join(' ')
       }
   } else {
+      policies = [
+          "base-uri 'self';",
+          "connect-src 'self';",
+          "default-src 'none';",
+          "font-src 'self';",
+          "form-action 'self';",
+          "frame-ancestors 'none';",
+          "frame-src 'self';",
+          "img-src 'self';",
+          "manifest-src 'self';",
+          "media-src 'self';",
+          "object-src 'none';",
+          "script-src 'self';",
+          "style-src 'self';",
+          "worker-src 'none';"
+      ];
       headers['content-security-policy'] = {
-          value: "frame-ancestors 'none'; default-src 'none'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none'; form-action 'self';"
+          value: policies.join(' ')
       }
   }
   // Add various security headers
