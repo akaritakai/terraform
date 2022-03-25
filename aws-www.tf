@@ -79,7 +79,7 @@ function handler(event) {
           "manifest-src 'self';",
           "media-src 'self';",
           "object-src 'none';",
-          "script-src 'self';",
+          "script-src 'self' https://platform.twitter.com;",
           "style-src 'self';",
           "worker-src 'none';"
       ];
