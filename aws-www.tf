@@ -54,12 +54,12 @@ function handler(event) {
           "font-src 'self';",
           "form-action 'self';",
           "frame-ancestors 'none';",
-          "frame-src 'self' https://www.youtube-nocookie.com https://platform.twitter.com;",
+          "frame-src 'self' https://www.youtube-nocookie.com;",
           "img-src 'self' https://i.ytimg.com;",
           "manifest-src 'self';",
           "media-src 'self';",
           "object-src 'none';",
-          "script-src 'self';",
+          "script-src 'self' https://platform.twitter.com;",
           "style-src 'self';",
           "worker-src 'none';"
       ];
