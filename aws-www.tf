@@ -60,7 +60,7 @@ function handler(event) {
           "media-src 'self';",
           "object-src 'none';",
           "script-src 'self' https://platform.twitter.com;",
-          "style-src 'self' https://platform.twitter.com;",
+          "style-src 'self' 'unsafe-inline' https://platform.twitter.com;",
           "worker-src 'none';"
       ];
       headers['content-security-policy'] = {
