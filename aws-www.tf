@@ -78,8 +78,8 @@ function handler(event) {
           "img-src 'self';",
           "manifest-src 'self';",
           "media-src 'self';",
-          "object-src 'none';",
-          "script-src 'self' https://platform.twitter.com;",
+          "object-src 'none'",
+          "script-src 'self'm;",
           "style-src 'self';",
           "worker-src 'none';"
       ];
