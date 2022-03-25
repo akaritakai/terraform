@@ -54,7 +54,7 @@ function handler(event) {
           "font-src 'self';",
           "form-action 'self';",
           "frame-ancestors 'none';",
-          "frame-src 'self' https://www.youtube-nocookie.com;",
+          "frame-src 'self' https://www.youtube-nocookie.com https://platform.twitter.com;",
           "img-src 'self' https://i.ytimg.com;",
           "manifest-src 'self';",
           "media-src 'self';",
