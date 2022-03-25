@@ -46,27 +46,7 @@ function handler(event) {
     };
   }
   // Add a restrictive CSP for the site and a more generous one for the blog
-  if (event.request.uri.startsWith('/blog/')) {
-      var policies = [
-          "base-uri 'self';",
-          "connect-src 'self';",
-          "default-src 'none';",
-          "font-src 'self';",
-          "form-action 'self';",
-          "frame-ancestors 'none';",
-          "frame-src 'self' https://www.youtube-nocookie.com;",
-          "img-src 'self' https://i.ytimg.com;",
-          "manifest-src 'self';",
-          "media-src 'self';",
-          "object-src 'none';",
-          "script-src 'self';",
-          "style-src 'self';",
-          "worker-src 'none';"
-      ];
-      headers['content-security-policy'] = {
-          value: policies.join(' ')
-      }
-  } else {
+  if (!event.request.uri.startsWith('/blog/')) {
       var policies = [
           "base-uri 'self';",
           "connect-src 'self';",
