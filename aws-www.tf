@@ -78,7 +78,7 @@ function handler(event) {
           "img-src 'self';",
           "manifest-src 'self';",
           "media-src 'self';",
-          "object-src 'none'",
+          "object-src 'none';",
           "script-src 'self';",
           "style-src 'self';",
           "worker-src 'none';"
